@@ -1,0 +1,122 @@
+rails g model User first_name:string last_name:string description:text email:string age:integer
+rails g model City name:string zip_code:string
+rails g model Gossip title:string content:string
+rails g model Tag title:string 
+rails g model PrivateMessage content:text
+rails g model Comment content:text
+rails g model Like 
+
+*****rappel relation*******
+Un utilisateur appartient à une seule ville mais une ville peut contenir plusieurs utilisateurs.
+Un utilisateur peut écrire plusieurs gossips mais un gossip ne peut être écrit que par un seul utilisateur.
+Un gossip peut avoir plusieurs tags et un tag peut être présent sur plusieurs gossip (genre #bromance).
+Un PM(private Message) aura un expéditeur et un (ou plusieurs) destinataires.
+Un gossip peut avoir plusieurs commentaires mais un commentaire ne peut correspondre qu'a un gossip précis.
+Les utilisateurs peuvent écrire plusieurs commentaires mais un commentaire n'a qu'un seul auteur.
+Un utilisateur peut mettre des likes sur des gossips ou des commentaires
+
+
+
+
+******************************user ***********************
+**table**
+belongs_to :city
+
+**relation**
+belongs_to :city
+has_many :gossips
+
+
+******************************ville**************************
+**table**
+belongs_to :user
+
+**relations**
+belongs_to :user
+
+
+********************************tag***********************
+**table**
+
+**relations**
+has_many :gossips
+
+*******************************PM *********************************
+**table**
+belongs_to :user
+
+**relations**
+belongs_to :user(expediteur)
+has_many :users (destinataires)
+
+
+
+*******************************gossip *********************************
+**table**
+belongs_to :user
+
+**relations**
+has_many :comments
+has_many :tags
+belongs_to :user
+
+
+*******************************comment *********************************
+**table**
+belongs_to :user(auteur)
+
+**relations**
+belongs_to :user(auteur)
+has_many :likes, through: :user
+....
+
+
+
+
+
+
+
+
+
+
+
+*****seed ******
+#Tu vas faire 10 utilisateurs en base avec Faker.
+10.times do 
+  User.create(first_name: Faker::Name.first_name last_name:Faker::Name.last_name  description: Faker::Lorem.words email:Faker::Internet.email age: [ rand(10), rand(80) ])
+end
+
+
+
+#10 villes en base avec Faker
+10.times do 
+  City.create(city_name: Faker::Address.city)
+end
+
+#20 gossips en base avec Faker et les lier avec leur auteur.
+20.times do 
+  Gossip.create(title: Faker::Movie.quote content: Faker::Lorem.words)
+end
+
+#10 tags en base avec Faker.     --> TODO Chaque gossip aura (au minimum) un tag. 
+10.times do 
+  Tag.create(title: Faker::Movie.title)
+end
+
+#quelques PM en base avec Faker   -->TODO  et leur donner un expéditeur et un (ou plusieurs) destinataires.
+10.times do 
+  PrivateMessage.create(content: Faker::Lorem.words)
+end
+
+#Tu vas faire 20 commentaires en base avec Faker -->  TODO et les lier avec leur auteur et le gossip associé.
+20.times do 
+  Comment( content: Faker::Lorem.words)
+end
+
+
+#Tu vas faire 20 likes en base avec Faker  -->  TODO  en les mettant à des commentaires ou des gossips au hasard.
+20.times do 
+  Like.create
+end
+
+****test ******
