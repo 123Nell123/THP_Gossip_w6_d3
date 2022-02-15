@@ -2,11 +2,13 @@
 
 <h2> pour rajouter un potin c'est ici :  </h2>
 
-<%= link_to "nouveaux potins", static_pages_gossips_new_path %>
+
 
 
 <h2>  voici les derniers potins:  </h2>
 
 <%  @list.each do |gossip| %>
 <p class="card-text"><em><%= gossip.user.first_name %> à parler de  "<%= gossip.title %>"  </em></p>
+<a href="gossip/<%=gossip.id%>" class="btn btn-primary">Voir le potin</a>
+<a href="firstname/<%=gossip.id%>" class="btn btn-primary">Voir l'auteur'</a>
   <% end %>
