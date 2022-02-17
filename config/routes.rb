@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+
+
 #affichage GET par défaut avec home methode ET page !!!
   root to: 'static_pages#home'
 
@@ -15,6 +18,9 @@ Rails.application.routes.draw do
 
 #route dynamique affichage GET nouveau gossip
 get 'gossip(/:id)', to: 'static_pages#gossip'
+
+#creation d 'un potin
+resources :gossips, only: [ :create, :new]
 
 end
  

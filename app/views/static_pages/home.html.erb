@@ -1,14 +1,19 @@
+
+<div class="jumbotron">
+
 <h1>bienvenu sur cette appli </h1>
 
-<h2> pour rajouter un potin c'est ici :  </h2>
+<h2> 👋 pour rajouter un potin c'est ici :  </h2>
+<a href="<%= new_gossip_path %>" class="btn btn-primary mt-3 rounded-pill">👈 ecrire un potin</a>
+  </div>
 
-
-
-
-<h2>  voici les derniers potins:  </h2>
+<div class="jumbotron">
+ <h2>  voici les derniers potins:  </h2>
 
 <%  @list.each do |gossip| %>
 <p class="card-text"><em><%= gossip.user.first_name %> à parler de  "<%= gossip.title %>"  </em></p>
 <a href="gossip/<%=gossip.id%>" class="btn btn-primary">Voir le potin</a>
 <a href="firstname/<%=gossip.id%>" class="btn btn-primary">Voir l'auteur'</a>
   <% end %>
+
+  </div>

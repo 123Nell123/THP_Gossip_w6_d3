@@ -29,3 +29,7 @@ Gossip.destroy_all
   puts "user done"
   #20 gossips en base avec Faker et les lier avec leur auteur.
 
+  20.times do 
+    Gossip.create(title: Faker::Movie.quote, content: Faker::Lorem.words, user_id: User.all.sample.id)
+  end
+  puts "gossip done"

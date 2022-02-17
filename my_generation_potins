@@ -1,0 +1,78 @@
+- la présence du `title` est obligatoire, ce dernier ne peut pas faire moins de 3 caractères ni plus de 14 caractères
+- la présence du `content` est obligatoire
+
+# ******************** potins  ****************
+
+validates :title, 
+presence: true,
+ length: { in: 3..14 , wrong_length : "%{count} doit etre entre 3 et 14 caracteres"  }
+
+
+validates :content, 
+presence: true,
+
+
+# ******************** user  ****************
+
+validates :first_name, 
+presence: true
+
+
+validates :last_name, 
+presence: true,
+
+
+validates :email, 
+presence: true,
+format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/,
+    message: "only allows letters" }
+
+
+# ******************** cities  ****************
+validates :zip_code, 
+presence: true
+ 
+
+
+# ******************** date  ****************
+validates :created_at, comparison: { greater_than: :updated_at }
+
+
+
+
+#*****************
+2.2.1. Préparation des routes, du controller et de la view
+Pour créer un potin, il est nécessaire d'avoir un controller gossips contenant les méthodes #new et #create.
+Il faut également les routes (en mode REST) qui pointent vers ces 2 méthodes.
+Pour finir, il te faut la view qui va afficher le formulaire : gossips/new.html.erb. À noter qu'il n'existe pas de view create.html.erb : la méthode #create renvoie vers l'index.
+
+--> creation des routes
+resources :gossips, only: [ :create]
+
+1) verifie les routes avec $ rails routes
+Prefix Verb URI Pattern                    Controller#Actio
+gossips POST /gossips(.:format)            gossips#create
+
+
+--> creation des methodes ds le controleur
+controleur: gossips
+methode: create
+
+rails generate controller gossips new create   
+
+#new (methode de creation du formaulaires)
+#create (methode pour sauver en base)
+
+--> creation du formulaire
+
+<form action= <%= gossips_path %>  method="POST">
+<input type="text" name="nouveau_gossip">
+<input type="submit" value="Envoyer le formulaire"></form>
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+rq: pointe vers la route /gossips
+
+
+--> ds la methode create
+on recupere le params et on enregistre en base
+
