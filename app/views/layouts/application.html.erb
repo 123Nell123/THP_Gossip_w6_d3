@@ -43,6 +43,14 @@
     <li class="nav-item">
           <%= link_to "Contact", static_pages_contact_path,  class: "nav-link active" %>
     </li>
+        <li class="nav-item">
+          <%= link_to "creer un compte", new_user_path,  class: "nav-link active" %>
+    </li>
+ <li class="nav-item">
+<%= link_to "Se déconnecter", session_path(session.id), method: :delete, class: "nav-link active" %>
+</li>
+
+
 <!-- fin de mes pages ici -->
 
      

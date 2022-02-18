@@ -1,0 +1,16 @@
+            <form action= "<%= sessions_path %>" method="POST" class="form-signin">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            
+               
+              <br>
+                <label for="inputLogin">Login</label>
+                <input type="text" name="Login" id="inputLogin" class="form-control" placeholder="bob" required>
+                
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control"  required>
+           
+              <br>
+              <button class="btn btn-primary" type="submit">Connexion</button>
+            </form>
+            <div class="text-center">
+            

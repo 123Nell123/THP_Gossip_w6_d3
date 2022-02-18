@@ -1,0 +1,17 @@
+***model****
+rails g model Add_password_digest_users password_digest:string
+rails g model Add_login_users login:string
+
+
+sessions_controller
+resources :sessions 
+
+rails g controller sessions  new create destroy
+
+**todo: 
+Si l'utilisateur n'est pas connecté, il y aura un dropdown "S'inscrire / Se connecter", avec un bouton pour lien (users#new) et un lien pour se connecter (sessions#new)
+Si l'utilisateur est connecté, il y aura un bouton pour se déconnecter (sessions#destroy)
+
+
+rails g controller cities show
+rails g scaffold User username:string bio:text

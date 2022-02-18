@@ -1,0 +1,19 @@
+
+**********************************
+/gossips/3, tu arrives sur la page affichant le contenu du potin portant l'ID 3
+
+1) ajout la route show 
+ GET  /gossip(/:id)(.:format)        static_pages#gossip
+
+ 2) ajouter au controleur gossip une methode READ
+ qui permet d'obtenir un gossip en fonction de son ID
+  @gossip_id = Gossip.find(params[id])
+
+
+3) cree une page show  
+qui va recupere la variiable renvoye par le controleur
+*****************************************
+meme chose pour user
+resources :users
+rails g controller Users index show new create edit update destroy
+remplir les methodes

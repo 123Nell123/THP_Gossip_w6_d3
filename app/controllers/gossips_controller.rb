@@ -1,27 +1,20 @@
 class GossipsController < ApplicationController
   def new
     # page de creation du formulaire
-    puts "$" * 60
-    puts "ceci est le contenu de params depuis la methode new :"
-    puts params
+
     puts "$" * 60
     @gossip = Gossip.new
   end
 
   def create
-
-  
-    # doit renvoyer vers l'index (et non vers la vue create)
-    puts "$" * 60
-    puts "ceci est le contenu de params depuis la methode create :"
-    puts params
-    puts "$" * 60
+ 
+    current_user = User.find_by_id(session[:current_user_id])
 
     begin 
     @gossip = Gossip.new(
       'title' => params[:title],
       'content' => params[:content],
-      'user_id' =>  User.all.sample.id)
+      'user_id' =>  current_user.id)
      
         if @gossip.save
         puts "#ici#" *10
@@ -30,7 +23,6 @@ class GossipsController < ApplicationController
      
         # redirect_to root_path  # repasse par le controleur
         render ('root_path') 
-
 
         else
             puts "#nopee#" *10
@@ -42,17 +34,18 @@ class GossipsController < ApplicationController
     end
 
 
+  end
 
-    # if @gossip.save
-    #   puts "#ici#" *10
-    #   redirect_to root_path
-    # else
-    #   puts "#nopee#" *10
-    #   render 'new'
-    # end
+  def show
+    @gossip = Gossip.find(params[:id])
+  end
 
-
-
-
+  def update
+    @gossip = Gossip.find(params[:id])
+    if @gossip.update(tes_params)
+      redirect_to @gossip
+    else
+      render :edit
+    end 
   end
 end
